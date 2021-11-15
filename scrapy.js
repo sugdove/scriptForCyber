@@ -60,7 +60,7 @@ const dataRes = (arr) => {
   ]
   const result_arr = []
   for (let i = 0; i < arr.length; i++) {
-    // agility 敏捷 brains 智力 charm 精力 physique体力 strenth力量
+    // agility敏捷 brains智力 charm精力 physique体力 strenth力量
     const { level, price, order_id } = arr[i]
     // 满足能够打工的条件
     for (var j = 0; j < useful_arr.length; j++) {
@@ -88,10 +88,14 @@ const dataRes = (arr) => {
     return b.result - a.result
   })
 
-  const top10 = result_arr.slice(0, 20)
-  for (let i = 0; i < top10.length; i++) {
-    const { result, order_id, income } = top10[i]
-    const income30day = 0.007913 * 864000 * income
+  const top20 = result_arr.slice(0, 20)
+  for (let i = 0; i < top20.length; i++) {
+    // 每个金币的价值($)
+    const percoin_price = 0.007913
+    // 30天能挖的区块数量(金币)
+    const block_number = 864000
+    const { result, order_id, income } = top20[i]
+    const income30day = percoin_price * block_number * income
     console.log(
       `购买id号为:${order_id}的角色性价比第${
         i + 1
